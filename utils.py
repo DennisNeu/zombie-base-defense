@@ -1,0 +1,8 @@
+"""Simple module to hold important variables"""
+
+SCREEN_WITDH = 800
+SCREEN_HEIGHT = 800
+
+BACKGROUND_COLOR = (181, 183, 181)
+BASE_COLOR = (139, 69, 19)
+ZOMBIE_COLOR = (0, 100, 0)

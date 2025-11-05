@@ -8,4 +8,5 @@ BASE_COLOR = (139, 69, 19)
 ZOMBIE_COLOR = (0, 100, 0)
 PROJECTILE_COLOR = (255, 255, 0)
 
-BASE_HEALTH = 100
+base_health = 100
+projectile_damage = 10

@@ -10,7 +10,7 @@ class Base:
     def __init__(self, x, y, width, height):
         """Initialize the Base with position and size."""
         self.rect = pygame.Rect(x, y, width, height)
-        self.health = utils.BASE_HEALTH
+        self.health = utils.base_health
 
     def draw(self, screen):
         """Draw the Base on the given screen."""

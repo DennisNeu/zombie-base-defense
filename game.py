@@ -15,6 +15,10 @@ FPS = 60
 dt = clock.tick(60) / 1000
 font = pygame.font.SysFont(None, 36)
 
+# Sounds
+gunshot_sound = pygame.mixer.Sound("sfx/gunshot.mp3")
+gunshot_sound.set_volume(0.2)
+
 
 base = Base(utils.SCREEN_WITDH / 2 - 25, utils.SCREEN_HEIGHT / 2 - 25, 50, 50)  # Create a base instance
 
@@ -30,6 +34,7 @@ while running:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # left click
             mx, my = pygame.mouse.get_pos()
             projectiles.append(Projectile(utils.SCREEN_WITDH / 2, utils.SCREEN_HEIGHT / 2, mx, my))
+            gunshot_sound.play()
         
 
     # Game logic goes here

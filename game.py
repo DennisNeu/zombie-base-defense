@@ -11,6 +11,8 @@ screen = pygame.display.set_mode((utils.SCREEN_WITDH, utils.SCREEN_HEIGHT))
 pygame.display.set_caption("Zombie Defense")
 clock = pygame.time.Clock()
 FPS = 60
+font = pygame.font.SysFont(None, 36)
+
 
 base = Base(utils.SCREEN_WITDH / 2 - 25, utils.SCREEN_HEIGHT / 2 - 25, 50, 50)  # Create a base instance
 
@@ -28,5 +30,7 @@ while running:
     # Drawing code goes here
     screen.fill(utils.BACKGROUND_COLOR)  # Clear screen with black
     base.draw(screen)
+    text_surface = font.render(f"Base Health: {base.get_health()}", True, (255, 255, 255), (10, 10, 20))
+    screen.blit(text_surface, (10, 10))
     pygame.display.flip() # Update the display
     clock.tick(FPS)

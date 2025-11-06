@@ -6,6 +6,7 @@ import utils
 from base import Base
 from projectile import Projectile
 from sound_manager import SoundManager
+from zombie import Zombie
 
 # Initialize Pygame
 pygame.init()
@@ -24,6 +25,7 @@ base = Base(utils.SCREEN_WITDH / 2 - 25, utils.SCREEN_HEIGHT / 2 - 25, 50, 50)  
 
 running = True
 projectiles = []
+zombies = []
 
 while running:
     for event in pygame.event.get():
@@ -33,7 +35,7 @@ while running:
             mx, my = pygame.mouse.get_pos()
             projectiles.append(Projectile(utils.SCREEN_WITDH / 2, utils.SCREEN_HEIGHT / 2, mx, my))
             sound_manager.play_sound("gunshot")
-        
+            zombies.append(Zombie(speed=50, health=30))
 
     # Game logic goes here
     for p in projectiles[:]:
@@ -46,6 +48,9 @@ while running:
     base.draw(screen)
     for b in projectiles:
         b.draw(screen)
+    for z in zombies:
+        z.move_towards_base(utils.SCREEN_WITDH / 2, utils.SCREEN_HEIGHT / 2, dt)
+        z.draw(screen)
     text_surface = font.render(f"Base Health: {base.get_health()}", True, (255, 255, 255), (10, 10, 20))
     screen.blit(text_surface, (10, 10))
     pygame.display.flip() # Update the display

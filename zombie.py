@@ -6,12 +6,12 @@ import utils
 
 class Zombie:
     def __init__(self, speed, health):
-        self.x, self.y = self.calculate_random_spawn_position()
+        self.x, self.y = self.generate_random_spawn_position()
         self.speed = speed
         self.health = health
 
-    def calculate_random_spawn_position(self):
-        """Calculate a random spawn position for the zombie outside a specific radius."""
+    def generate_random_spawn_position(self):
+        """Generate spawn coordinates along the edges of the screen."""
         random_case = random.randint(1, 4)
         
         if random_case == 1:  # Spawn along the top edge

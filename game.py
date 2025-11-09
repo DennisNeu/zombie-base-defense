@@ -51,8 +51,12 @@ while running:
     for z in zombies:
         z.move_towards_base(utils.SCREEN_WITDH / 2, utils.SCREEN_HEIGHT / 2, dt)
         z.draw(screen)
-    text_surface = font.render(f"Base Health: {base.get_health()}", True, (255, 255, 255), (10, 10, 20))
-    screen.blit(text_surface, (10, 10))
+    
+    # TODO: Refactor texyt logic
+    base_health_text = font.render(f"Base Health: {base.get_health()}", True, (255, 255, 255), (10, 10, 20))
+    kill_count_text = font.render(f"Kill Count: {utils.kill_count}", True, (255, 255, 255), (10, 50, 20))
+    screen.blit(kill_count_text, (10, 50))
+    screen.blit(base_health_text, (10, 10))
     pygame.display.flip() # Update the display
     clock.tick(FPS)
 

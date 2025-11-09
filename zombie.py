@@ -9,6 +9,7 @@ class Zombie:
         self.x, self.y = self.generate_random_spawn_position()
         self.speed = speed
         self.health = health
+        self.radius = 10
 
     def generate_random_spawn_position(self):
         """Generate spawn coordinates along the edges of the screen."""
@@ -43,4 +44,4 @@ class Zombie:
 
     def draw(self, surface):
         """Draw the zombie on the given surface."""
-        pygame.draw.circle(surface, utils.ZOMBIE_COLOR, (int(self.x), int(self.y)), 10)
+        pygame.draw.circle(surface, utils.ZOMBIE_COLOR, (int(self.x), int(self.y)), self.radius)

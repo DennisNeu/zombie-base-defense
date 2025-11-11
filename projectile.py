@@ -4,8 +4,9 @@ import pygame
 import utils
 from math import hypot
 
-class Projectile:
+class Projectile(pygame.sprite.Sprite):
     def __init__(self, x, y, target_x, target_y, speed=500):
+        super().__init__()
         dx = target_x - x
         dy = target_y - y
         length = hypot(dx, dy)
@@ -16,6 +17,10 @@ class Projectile:
         self.x = x
         self.y = y
         self.radius = 4
+        self.image = pygame.Surface((40, 40), pygame.SRCALPHA)
+        self.rect = pygame.Rect(self.x - self.radius, self.y - self.radius, self.radius * 2, self.radius * 2)
+
+        
         self.alive = True
 
     def update(self, dt):

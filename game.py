@@ -42,6 +42,29 @@ while running:
         p.update(dt)
         if not p.alive:
             projectiles.remove(p)
+    
+    # AI cooked hard
+    for z in zombies[:]:
+        z.move_towards_base(utils.SCREEN_WITDH / 2, utils.SCREEN_HEIGHT / 2, dt)
+        # Check collision with base
+        base_rect = base.rect
+        zombie_rect = pygame.Rect(z.x - z.radius, z.y - z.radius, z.radius * 2, z.radius * 2)
+        if base_rect.colliderect(zombie_rect):
+            base.take_damage(10)
+            zombies.remove(z)
+            sound_manager.play_sound("base_hit")
+            continue
+        # Check collision with projectiles
+        for p in projectiles:
+            projectile_rect = pygame.Rect(p.x - p.radius, p.y - p.radius, p.radius * 2, p.radius * 2)
+            if zombie_rect.colliderect(projectile_rect):
+                z.health -= 10
+                p.alive = False
+                sound_manager.play_sound("impact")
+                if z.health <= 0:
+                    zombies.remove(z)
+                    utils.kill_count += 1
+                break
 
     # Drawing code goes here
     screen.fill(utils.BACKGROUND_COLOR)  # Clear screen with black
@@ -49,7 +72,6 @@ while running:
     for b in projectiles:
         b.draw(screen)
     for z in zombies:
-        z.move_towards_base(utils.SCREEN_WITDH / 2, utils.SCREEN_HEIGHT / 2, dt)
         z.draw(screen)
     
     # TODO: Refactor texyt logic

@@ -4,12 +4,15 @@ import pygame
 import random
 import utils
 
-class Zombie:
+class Zombie(pygame.sprite.Sprite):
     def __init__(self, speed, health):
+        super().__init__()
         self.x, self.y = self.generate_random_spawn_position()
         self.speed = speed
         self.health = health
+        self.image = pygame.Surface((40, 40), pygame.SRCALPHA)
         self.radius = 10
+        self.rect = pygame.Rect(self.x - self.radius, self.y - self.radius, self.radius * 2, self.radius * 2)
 
     def generate_random_spawn_position(self):
         """Generate spawn coordinates along the edges of the screen."""

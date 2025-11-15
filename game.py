@@ -10,7 +10,7 @@ from projectile import Projectile
 from sound_manager import SoundManager
 from zombie import Zombie
 
-def check_collisions():
+def check_collisions(dt):
     # AI cooked hard
     for z in zombies[:]:
         z.move_towards_base(utils.SCREEN_WITDH / 2, utils.SCREEN_HEIGHT / 2, dt)
@@ -42,6 +42,8 @@ def spawn_zombie():
 def start_game():
     running = True
     while running:
+        dt = clock.tick(FPS) / 1000.0
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -58,7 +60,7 @@ def start_game():
         
         spawn_zombie()
         
-        check_collisions()
+        check_collisions(dt)
 
         if base.get_health() <= 0:
             running = False  # End game if base health is 0
@@ -88,7 +90,6 @@ screen = pygame.display.set_mode((utils.SCREEN_WITDH, utils.SCREEN_HEIGHT))
 pygame.display.set_caption("Zombie Defense")
 clock = pygame.time.Clock()
 FPS = 60
-dt = clock.tick(60) / 1000
 font = pygame.font.SysFont(None, 36)
 sound_manager = SoundManager()
 

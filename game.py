@@ -13,7 +13,7 @@ from zombie import Zombie
 def check_collisions(dt):
     # AI cooked hard
     for z in zombies[:]:
-        z.move_towards_base(utils.SCREEN_WITDH / 2, utils.SCREEN_HEIGHT / 2, dt)
+        z.move_towards_base(utils.SCREEN_WIDTH / 2, utils.SCREEN_HEIGHT / 2, dt)
         # Check collision with base
         base_rect = base.rect
         zombie_rect = pygame.Rect(z.x - z.radius, z.y - z.radius, z.radius * 2, z.radius * 2)
@@ -49,7 +49,7 @@ def start_game():
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # left click
                 mx, my = pygame.mouse.get_pos()
-                projectiles.append(Projectile(utils.SCREEN_WITDH / 2, utils.SCREEN_HEIGHT / 2, mx, my))
+                projectiles.append(Projectile(utils.SCREEN_WIDTH / 2, utils.SCREEN_HEIGHT / 2, mx, my))
                 sound_manager.play_sound("gunshot")
 
         # Game logic goes here
@@ -86,7 +86,7 @@ def start_game():
 
 # Initialize Pygame
 pygame.init()
-screen = pygame.display.set_mode((utils.SCREEN_WITDH, utils.SCREEN_HEIGHT))
+screen = pygame.display.set_mode((utils.SCREEN_WIDTH, utils.SCREEN_HEIGHT))
 pygame.display.set_caption("Zombie Defense")
 clock = pygame.time.Clock()
 FPS = 60
@@ -94,19 +94,19 @@ font = pygame.font.SysFont(None, 36)
 sound_manager = SoundManager()
 
 # Game Over
-game_over_menu = pgm.Menu('Game Over', utils.SCREEN_WITDH, utils.SCREEN_HEIGHT, theme=pgm.themes.THEME_DARK)
+game_over_menu = pgm.Menu('Game Over', utils.SCREEN_WIDTH, utils.SCREEN_HEIGHT, theme=pgm.themes.THEME_DARK)
 game_over_menu.add.label(f'Final Kill Count: {utils.kill_count}')
 game_over_menu.add.button('Quit', pgm.events.EXIT)
 
 
-base = Base(utils.SCREEN_WITDH / 2 - 25, utils.SCREEN_HEIGHT / 2 - 25, 50, 50)  # Create a base instance
+base = Base(utils.SCREEN_WIDTH / 2 - 25, utils.SCREEN_HEIGHT / 2 - 25, 50, 50)  # Create a base instance
 
 # Loop
 projectiles = []
 zombies = []
 
 # Menu
-menu = pgm.Menu('Zombie Defense', utils.SCREEN_WITDH, utils.SCREEN_HEIGHT, theme=pgm.themes.THEME_DARK)
+menu = pgm.Menu('Zombie Defense', utils.SCREEN_WIDTH, utils.SCREEN_HEIGHT, theme=pgm.themes.THEME_DARK)
 menu.add.button('Start Game', start_game)
 menu.add.button('Quit', pgm.events.EXIT)
 menu.mainloop(screen)

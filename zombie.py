@@ -19,16 +19,16 @@ class Zombie(pygame.sprite.Sprite):
         random_case = random.randint(1, 4)
         
         if random_case == 1:  # Spawn along the top edge
-            x = random.uniform(0, utils.SCREEN_WITDH)
+            x = random.uniform(0, utils.SCREEN_WIDTH)
             y = -50
         elif random_case == 2:  # Spawn along the bottom edge
-            x = random.uniform(0, utils.SCREEN_WITDH)
+            x = random.uniform(0, utils.SCREEN_WIDTH)
             y = utils.SCREEN_HEIGHT + 50
         elif random_case == 3:  # Spawn along the left edge
             x = -50
             y = random.uniform(0, utils.SCREEN_HEIGHT)
         else:  # Spawn along the right edge
-            x = utils.SCREEN_WITDH + 50
+            x = utils.SCREEN_WIDTH + 50
             y = random.uniform(0, utils.SCREEN_HEIGHT)
 
         return x, y

@@ -27,7 +27,7 @@ class Projectile(pygame.sprite.Sprite):
         self.x += self.vx * dt
         self.y += self.vy * dt
         # remove bullet if it goes off screen
-        if not (0 <= self.x <= utils.SCREEN_WITDH and 0 <= self.y <= utils.SCREEN_HEIGHT):
+        if not (0 <= self.x <= utils.SCREEN_WIDTH and 0 <= self.y <= utils.SCREEN_HEIGHT):
             self.alive = False
 
     def draw(self, surface):

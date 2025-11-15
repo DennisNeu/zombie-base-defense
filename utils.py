@@ -12,5 +12,4 @@ PROJECTILE_COLOR = (255, 255, 0)
 
 BASE_POSITION = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
-# These might change during gameplay
 kill_count = 0

@@ -36,8 +36,8 @@ def check_collisions(dt):
                 p.alive = False
                 sound_manager.play_sound("impact")
                 if z.health <= 0:
-                    zombies.remove(z)
                     utils.kill_count += 1
+                    zombies.remove(z)
                 break
 
 def spawn_zombie():
@@ -101,10 +101,7 @@ font = pygame.font.SysFont(None, 36)
 sound_manager = SoundManager()
 game_over_menu = pgm.Menu('Game Over', utils.SCREEN_WIDTH, utils.SCREEN_HEIGHT, theme=pgm.themes.THEME_DARK)
 
-
 base = Base(utils.SCREEN_WIDTH / 2 - 25, utils.SCREEN_HEIGHT / 2 - 25, 50, 50)  # Create a base instance
-
-# Loop
 projectiles = []
 zombies = []
 

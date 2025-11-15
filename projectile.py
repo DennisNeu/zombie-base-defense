@@ -5,10 +5,11 @@ import utils
 from math import hypot
 
 class Projectile(pygame.sprite.Sprite):
-    def __init__(self, x, y, target_x, target_y, speed=500):
+    def __init__(self, x, y, target_x, target_y, speed=500, damage=10):
         super().__init__()
         dx = target_x - x
         dy = target_y - y
+        self.damage = damage
         length = hypot(dx, dy)
         if length == 0:
             length = 1

@@ -24,7 +24,7 @@ def check_collisions(dt):
         base_rect = base.rect
         zombie_rect = pygame.Rect(z.x - z.radius, z.y - z.radius, z.radius * 2, z.radius * 2)
         if base_rect.colliderect(zombie_rect):
-            base.take_damage(10)
+            base.health -= z.damage
             zombies.remove(z)
             sound_manager.play_sound("base_hit")
             continue
@@ -32,7 +32,7 @@ def check_collisions(dt):
         for p in projectiles:
             projectile_rect = pygame.Rect(p.x - p.radius, p.y - p.radius, p.radius * 2, p.radius * 2)
             if zombie_rect.colliderect(projectile_rect):
-                z.health -= 10
+                z.health -= p.damage
                 p.alive = False
                 sound_manager.play_sound("impact")
                 if z.health <= 0:
@@ -42,8 +42,9 @@ def check_collisions(dt):
 
 def spawn_zombie():
     """Spawn a zombie with a random chance."""
-    if random.randint(0,60) == 60:  # 2% chance to spawn a zombie each frame
-        zombies.append(Zombie(speed=50, health=30))
+
+    if random.random() < 0.02:  # 2% chance to spawn a zombie each frame
+        zombies.append(Zombie(speed=50, health=30, damage=10))
 
 def start_game():
     running = True
@@ -68,7 +69,7 @@ def start_game():
         
         check_collisions(dt)
 
-        if base.get_health() <= 0:
+        if base.health <= 0:
             running = False  # End game if base health is 0
             show_game_over_menu()
 
@@ -82,7 +83,7 @@ def start_game():
             z.draw(screen)
         
         # TODO: Refactor text logic
-        base_health_text = font.render(f"Base Health: {base.get_health()}", True, (255, 255, 255), (10, 10, 20))
+        base_health_text = font.render(f"Base Health: {base.health}", True, (255, 255, 255), (10, 10, 20))
         kill_count_text = font.render(f"Kill Count: {utils.kill_count}", True, (255, 255, 255), (10, 50, 20))
         screen.blit(kill_count_text, (10, 50))
         screen.blit(base_health_text, (10, 10))
@@ -113,6 +114,5 @@ menu.add.button('Start Game', start_game)
 menu.add.button('Quit', pgm.events.EXIT)
 menu.mainloop(screen)
 
-
-sys.exit()
 pygame.quit()
+sys.exit()

@@ -10,6 +10,12 @@ from projectile import Projectile
 from sound_manager import SoundManager
 from zombie import Zombie
 
+def show_game_over_menu():
+    game_over_menu = pgm.Menu('Game Over', utils.SCREEN_WIDTH, utils.SCREEN_HEIGHT, theme=pgm.themes.THEME_DARK)
+    game_over_menu.add.label(f'Final Kill Count: {utils.kill_count}')
+    game_over_menu.add.button('Quit', pgm.events.EXIT)
+    game_over_menu.mainloop(screen)
+
 def check_collisions(dt):
     # AI cooked hard
     for z in zombies[:]:
@@ -64,7 +70,7 @@ def start_game():
 
         if base.get_health() <= 0:
             running = False  # End game if base health is 0
-            game_over_menu.mainloop(screen)
+            show_game_over_menu()
 
 
         # Drawing code goes here
@@ -92,11 +98,7 @@ clock = pygame.time.Clock()
 FPS = 60
 font = pygame.font.SysFont(None, 36)
 sound_manager = SoundManager()
-
-# Game Over
 game_over_menu = pgm.Menu('Game Over', utils.SCREEN_WIDTH, utils.SCREEN_HEIGHT, theme=pgm.themes.THEME_DARK)
-game_over_menu.add.label(f'Final Kill Count: {utils.kill_count}')
-game_over_menu.add.button('Quit', pgm.events.EXIT)
 
 
 base = Base(utils.SCREEN_WIDTH / 2 - 25, utils.SCREEN_HEIGHT / 2 - 25, 50, 50)  # Create a base instance
